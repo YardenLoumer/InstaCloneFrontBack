@@ -11,6 +11,10 @@ const app = new Koa
 
 app.keys = ['secret']
 
+if (process.env.NODE_ENV === "production") {
+    app.use(serve('../front/dist'))
+}
+
 app
     .use(serve('./static'))
     .use(bodyParser())
