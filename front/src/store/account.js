@@ -1,6 +1,5 @@
 export default {
     namespaced: true,
-
     state: {
         isAuthenticated: false,
         user: {
@@ -9,7 +8,6 @@ export default {
             sername: null
         }
     },
-
     mutations: {
         signin (state, user) {
             state.isAuthenticated = true
@@ -26,7 +24,6 @@ export default {
             })
         }
     },
-
     actions: {
         async signin ({ commit, state }, data) {
             // Уже авторизован

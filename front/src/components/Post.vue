@@ -7,10 +7,13 @@
 						img(:src='postData.user.ava', alt='')
 					router-link.user__name(:to='`/post/${postData.id}/edit`') {{ postData.user.name }} {{ postData.user.surname }}
 			.post__links
-				a.edit-link(href='#')
+				a.edit-link(
+					href='#'
+					@click.prevent="deletePost()"
+					) 
 					i.far.fa-trash-alt
 					| Delete
-				a.edit-link(href='edit.html')
+				router-link.edit-link(:to='`/post/${postData.id}/edit`')
 					i.fas.fa-pencil-alt
 					| Edit
 		.post__img
@@ -57,6 +60,15 @@ export default {
 			await this.$store.dispatch('content/loadPost', this.$props.postData.id)
 
 			this.newComment = ''
+		},
+
+		async deletePost () {
+			
+			await this.$store.dispatch('content/deletePost', {
+				postId: this.$props.postData.id
+			})
+
+			this.$router.go()
 		}
 	}
 }

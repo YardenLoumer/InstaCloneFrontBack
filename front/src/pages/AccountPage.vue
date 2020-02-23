@@ -29,15 +29,12 @@ export default {
 				password: ''
 			}
 		}
-
 		if (process.env.NODE_ENV === 'development') {
 			data.user.login = 'test1'
 			data.user.password = 'test1'
 		}
-
 		return data
 	},
-
 	methods: {
 		async signin () {
 			const password = this.user.password

@@ -1,11 +1,11 @@
 {
-   "postIdCounter": 6,
+   "postIdCounter": 43,
    "userIdCounter": 2,
-   "commentIdCounter": 8,
+   "commentIdCounter": 16,
    "users": [
       {
          "id": 1,
-         "name": "Серьгей",
+         "name": "Сергей",
          "surname": "Марковин",
          "ava": "/images/01.png",
          "login": "test1",
@@ -26,37 +26,18 @@
          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, beatae."
       },
       {
-         "id": 2,
-         "image": "/images/girl-pc.jpg",
-         "authorId": 1,
-         "tags": [
-            "forest",
-            "travel",
-            "journey",
-            "holiday"
-         ],
-         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, beatae."
-      },
-      {
-         "id": 3,
+         "id": 41,
          "authorId": 1,
          "tags": [],
-         "description": "Тут какое-нибудь описание",
-         "image": "/images/8f45a50d1c5696b8376795d44c2f57ad.png"
+         "description": "wedding",
+         "image": "/images/image-1582132630432"
       },
       {
-         "id": 4,
+         "id": 42,
          "authorId": 1,
          "tags": [],
-         "description": "123123",
-         "image": "/images/eb4d1041149540b81b22d177c7413450.png"
-      },
-      {
-         "id": 5,
-         "authorId": 1,
-         "tags": [],
-         "description": "Вот описание",
-         "image": "/images/b3bfe51f8f60d3626539275945dd08b1.jpg"
+         "description": "our wedding!",
+         "image": "/images/image-1582211703827"
       }
    ],
    "comments": [
@@ -101,6 +82,54 @@
          "authorId": 1,
          "postId": 4,
          "content": "1111"
+      },
+      {
+         "id": 8,
+         "authorId": 1,
+         "postId": 4,
+         "content": "5555"
+      },
+      {
+         "id": 9,
+         "authorId": 1,
+         "postId": 35,
+         "content": "tttt"
+      },
+      {
+         "id": 10,
+         "authorId": 1,
+         "postId": 42,
+         "content": "fff"
+      },
+      {
+         "id": 11,
+         "authorId": 1,
+         "postId": 42,
+         "content": "ttt"
+      },
+      {
+         "id": 12,
+         "authorId": 1,
+         "postId": 42,
+         "content": "ggg"
+      },
+      {
+         "id": 13,
+         "authorId": 1,
+         "postId": 42,
+         "content": "haha"
+      },
+      {
+         "id": 14,
+         "authorId": 1,
+         "postId": 42,
+         "content": "nana"
+      },
+      {
+         "id": 15,
+         "authorId": 1,
+         "postId": 42,
+         "content": "fuck"
       }
    ]
 }

@@ -3,6 +3,9 @@ import database from '../database'
 import { imageUpload } from '../upload'
 import { exec } from 'child_process'
 import path from 'path'
+import { remove } from 'lodash'
+import { createContext } from 'vm'
+import multer from '@koa/multer'
 
 const router = new KoaRouter
 
@@ -34,22 +37,49 @@ router.post('/create', imageUpload.single('image'), async (ctx, next) => {
         }
     }
 
-    const mimeType = path.extname(ctx.file.originalname)
-    await exec(`mv ${ctx.file.path} ${ctx.file.destination}${ctx.file.filename}${mimeType}`)
-
+    //const mimeType = path.extname(ctx.file.originalname)
+   //console.log(ctx.file.path, ctx.file.destination, ctx.file.filename, mimeType)
+   
+   // await exec(`mv ${ctx.file.path} ${ctx.file.destination}${ctx.file.filename}${mimeType}`)
     const data = database.download()
     const post = {
         id: data.postIdCounter,
         authorId: ctx.state.user.id,
         tags: [],
         description: ctx.request.body.description,
-        image: `/images/${ctx.file.filename}${mimeType}`
+        image: `/images/${ctx.file.filename}`
     }
 
     data.posts.push(post)
     data.postIdCounter++
     database.upload(data)
 
+    ctx.body = { post }
+}) 
+
+router.get('/delete/:postId', async (ctx, next) => {
+   
+    console.log('i am id', ctx.params.postId)
+    const data = database.download()
+
+    const removedPost = remove(data.posts, (x) => x.id===parseInt(ctx.params.postId))
+    database.upload(data)
+    
+    ctx.body = {removedPost}
+  
+})
+
+router.post('/update', multer().none(), async (ctx, next) => {
+    if (!ctx.isAuthenticated()) {
+        ctx.body = {
+            error: 'Не авторизован'
+        }
+    }
+    console.log('i am request' , ctx.request.body)
+    const data = database.download()
+    const post = data.posts.find(x => x.id === parseInt(ctx.request.body.postId))
+    post.description = ctx.request.body.newDescription
+    database.upload(data)
     ctx.body = { post }
 })
 

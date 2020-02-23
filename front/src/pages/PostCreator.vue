@@ -20,6 +20,7 @@
 							rows="10"
 						)
 						button(@click.prevent="send()" :disabled="!base64") Отправить
+						
 </template>
 
 <script>
@@ -34,8 +35,10 @@ export default {
 
 	methods: {
 		imageInput (event) {
+			console.log(event.target.files)
 			const reader = new FileReader
 			reader.onload = event => this.base64 = event.target.result
+			//reader.onload = (event) => console.log(event.target.result)
 			reader.readAsDataURL(event.target.files[0])
 		},
 

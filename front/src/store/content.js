@@ -38,7 +38,7 @@ export default {
                 commit('addPost', post)
             }
         },
-
+ 
         async loadPost ({ commit }, postId) {
             const post = await fGet(`/api/post/${postId}`)
 
@@ -53,7 +53,6 @@ export default {
             if (!hasStatePost) {
                 await dispatch('loadPost', postId)
             }
-
             return state.posts.find(x => x.id === postId)
         },
 
@@ -69,9 +68,10 @@ export default {
             const loader = await fetch('/api/post/create', {
                 method: 'POST',
                 body: formData
-            }).then(x => x.json())
-
-            return loader
+            })
+            .then(x => x.json())
+            console.log(loader)
+           // return loader
         },
 
         async addComment ({ rootState }, data) {
@@ -89,6 +89,33 @@ export default {
             })
 
             console.log(sender)
+        },
+
+        async deletePost({rootState}, data){
+            if (!rootState.account || !rootState.account.isAuthenticated) {
+                return false
+            }
+            
+            console.log('deleting post no : ', data.postId)
+            const deleter = await fGet(`/api/post/delete/${data.postId}`)
+            
+            console.log('i am deleter', deleter)
+        },
+
+        async updatePost({rootState}, data){
+            if (!rootState.account || !rootState.account.isAuthenticated) {
+                return false
+            }
+            console.log('state: updating post no : ', data.postId, data.newDescription)
+
+            const formData = new FormData
+            formData.append('postId', data.postId)
+            formData.append('newDescription', data.newDescription)
+            const updater = await fetch('/api/post/update', {
+                method: "POST",
+                body: formData
+            })
+            console.log('state: i am updater', updater)
         }
     }
 }

@@ -17,7 +17,7 @@ router.post("/signin", async (ctx, next) => {
                 name: user.name,
                 surname: user.surname
             }
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                        
     }
 
     else {

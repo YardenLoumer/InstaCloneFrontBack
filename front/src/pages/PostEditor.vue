@@ -20,8 +20,8 @@
 				.post__edit-textarea-wrapper
 					textarea.post__edit-textarea #forest #travel #journey #holiday
 			.post__buttons
-				button.btn.btn--save Сохранить
-				button.btn.btn--cancel Отмена
+				button.btn.btn--save(@click="save()")  Сохранить
+				button.btn.btn--cancel(@click="cancel()") Отмена
 </template>
 
 <script>
@@ -39,6 +39,18 @@ export default {
 	computed: {
 		postId () {
 			return parseInt(this.$route.params.id)
+		}
+	},
+
+	methods: {
+		async save() {
+			
+			await this.$store.dispatch('content/updatePost', {
+				newDescription: this.post.description,
+				postId: this.postId
+			})
+
+			this.$router.push('/wall')
 		}
 	}
 }
